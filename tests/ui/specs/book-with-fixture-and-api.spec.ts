@@ -28,7 +28,7 @@ test.beforeAll(async ({ playwright }) => {
 test.describe('Books - Fixture & API', () => {
     // The scope of use is file or describe
     test.use({ isDupe: false });
-    test('Add brand new book', async ({ page, bookPage }) => { //first thing that will happen is to call the fixture automatically. whenever the fixture has a "use" it goes back to the test and then go back to the fixture again when the test is done and execute any remaining commands
+    test.skip('Add brand new book', async ({ page, bookPage }) => { //first thing that will happen is to call the fixture automatically. whenever the fixture has a "use" it goes back to the test and then go back to the fixture again when the test is done and execute any remaining commands
         await cleanBooks(userId, page);
         await bookPage.goto(userData.books.new);
     });

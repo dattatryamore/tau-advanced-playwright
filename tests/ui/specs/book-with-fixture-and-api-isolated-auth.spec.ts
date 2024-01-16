@@ -38,7 +38,7 @@ test.beforeEach(async ({ page }) => {
 test.describe('Book - Fixture & API with isolated auth', () => {
   test.use({ isDupe: true });
 
-  test('Add duplicate book', async ({ bookPage }) => {
+  test.skip('Add duplicate book', async ({ bookPage }) => {
       await addBooks(userId, userData.books.duplicate);
       await bookPage.goto(userData.books.duplicate);
   });

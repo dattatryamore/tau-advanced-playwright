@@ -1,0 +1,53 @@
+# Couldn't automatically generate a config from your source code.
+# This is a generic template to serve as a base for your custom config
+# See: https://circleci.com/docs/configuration-reference
+# Stacks detected: cicd:github-actions:.github/workflows,deps:node:.
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.3
+    
+jobs:
+  test:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      # Replace this with a real test runner invocation
+      - run:
+          name: install playwright browser
+          command: sudo npm install -D @playwright/test && npx playwright install-deps && npx playwright install 
+      - run:
+          name: Run tests
+          command: USERNAME=qa.datta@gmail.com PASSWORD=Test@123 npm run test-ui-c    
+  build:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      # Replace this with steps to build a package, or executable
+      - run:
+          name: Build an artifact
+          command: touch example.txt
+      - store_artifacts:
+          path: example.txt
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      # Replace this with steps to deploy to users
+      - run:
+          name: deploy
+          command: '#e.g. ./deploy.sh'
+      - run:
+          name: found github actions config
+          command: ':'
+workflows:
+  example:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
