@@ -26,8 +26,9 @@ jobs:
                     TEST=$(circleci tests glob "tests/ui/specs/*.ts")
                     echo "$TEST" | circleci tests run --command="USERNAME=qa.datta@gmail.com PASSWORD=Test@123  xargs npm run test-ui-c" --split-by=timings
       - run:
-                command: cp junit.xml ~/junit/
-                when: always
+          name: Copy junt xml file
+          command: cp junit.xml ~/junit/
+          when: always
       - store_test_results:
                 path: ~/junit                        
   build:
