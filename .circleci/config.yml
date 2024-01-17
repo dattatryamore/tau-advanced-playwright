@@ -27,10 +27,10 @@ jobs:
                     echo "$TEST" | circleci tests run --command="USERNAME=qa.datta@gmail.com PASSWORD=Test@123  xargs npm run test-ui-c" --split-by=timings
       - run:
           name: Copy junt xml file
-          command: cp junit.xml ~/junit/
+          command: cp junit.xml ~/junit/e2e/
           when: always
       - store_test_results:
-                path: ~/junit                        
+                path: ~/junit/e2e                        
   build:
     docker:
       - image: cimg/base:stable
