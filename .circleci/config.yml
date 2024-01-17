@@ -24,7 +24,7 @@ jobs:
           name: Run playwright tests
           command: |
                     TEST=$(circleci tests glob "tests/ui/specs/*.ts")
-                    echo "$TEST" | circleci tests run --command="xargs USERNAME=qa.datta@gmail.com PASSWORD=Test@123 npm run test-ui-c" --split-by=timings
+                    echo "$TEST" | circleci tests run --command="USERNAME=qa.datta@gmail.com PASSWORD=Test@123  xargs npm run test-ui-c" --split-by=timings
       - run:
                 command: cp junit.xml ~/junit/
                 when: always
