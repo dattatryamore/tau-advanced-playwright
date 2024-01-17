@@ -11,17 +11,25 @@ jobs:
   test:
     docker:
       - image: cimg/node:16.10
+    parallelism: 2
     steps:
       - checkout
       - node/install-packages:
           pkg-manager: npm
-      # Replace this with a real test runner invocation
+      - run: mkdir ~/junit     
       - run:
           name: install playwright browser
           command: sudo npm install -D @playwright/test && npx playwright install-deps && npx playwright install 
       - run:
-          name: Run tests
-          command: USERNAME=qa.datta@gmail.com PASSWORD=Test@123 npm run test-ui-c    
+          name: Run playwright tests
+          command: |
+                    TEST=$(circleci tests glob "tests/ui/specs/*.ts")
+                    echo "$TEST" | circleci tests run --command="xargs USERNAME=qa.datta@gmail.com PASSWORD=Test@123 npm run test-ui-c" --split-by=timings
+      - run:
+                command: cp junit.xml ~/junit/
+                when: always
+      - store_test_results:
+                path: ~/junit                        
   build:
     docker:
       - image: cimg/base:stable
@@ -30,7 +38,7 @@ jobs:
       # Replace this with steps to build a package, or executable
       - run:
           name: Build an artifact
-          command: touch example.txt
+          command: echo "some text" > example.txt
       - store_artifacts:
           path: example.txt
   deploy:
