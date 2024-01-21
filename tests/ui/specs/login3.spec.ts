@@ -17,20 +17,20 @@ test.beforeEach(async ({ page }) => {
   await page.waitForTimeout(20000);
 });
 
-test.describe('Book Store - Login', () => {
+test.describe('Book Store - Login 3', () => {
   test(`successfull login`, async () => {
     await loginPage.doLogin(userName, password);
     await loginPage.checkLoggedIn();
     
   });
 
-  test(`failing login - invalid username`, async () => {
+  test(`failing login 3- invalid username`, async () => {
     const invalidUsername = userData.invalidUsername;
     await loginPage.doLogin(invalidUsername, password);
     await loginPage.checkInvalidCredentials();
   });
 
-  test(`failing login - invalid password`, async () => {
+  test(`failing login 3- invalid password`, async () => {
     const invalidPassword = userData.invalidPassword;
     await loginPage.doLogin(userName, invalidPassword);
     await loginPage.checkInvalidCredentials();

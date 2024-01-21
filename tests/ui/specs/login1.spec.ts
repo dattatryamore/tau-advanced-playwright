@@ -19,18 +19,18 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Book Store - Login', () => {
-  test(`successfull login`, async () => {
+  test(`successfull login 1`, async () => {
     await loginPage.doLogin(userName, password);
     await loginPage.checkLoggedIn();
   });
 
-  test(`failing login - invalid username`, async () => {
+  test(`failing login 1- invalid username`, async () => {
     const invalidUsername = userData.invalidUsername;
     await loginPage.doLogin(invalidUsername, password);
     await loginPage.checkInvalidCredentials();
   });
 
-  test(`failing login - invalid password`, async () => {
+  test(`failing login 1- invalid password`, async () => {
     const invalidPassword = userData.invalidPassword;
     await loginPage.doLogin(userName, invalidPassword);
     await loginPage.checkInvalidCredentials();
