@@ -11,6 +11,7 @@ jobs:
   test:
     docker:
       - image: mcr.microsoft.com/playwright:v1.40.1-jammy
+    working_directory: ~/repo
   
     parallelism: 2
     steps:
@@ -34,6 +35,8 @@ jobs:
           command: echo "some text" > example.txt
       - store_artifacts:
           path: example.txt
+      - store_artifacts:
+          path: ~/repo/test-results
 
   deploy:
     docker:
