@@ -19,7 +19,9 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run: ls ~/repo   
-      - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; USERNAME=qa.datta@gmail.com PASSWORD=Test@123  xargs npm run test-ui-c -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+      - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; USERNAME=qa.datta@gmail.com PASSWORD=Test@123   npm run test-ui-c -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+      - run: ls ~/repo   
+      - run: ls ~/repo   
       - store_test_results:
           path: ./playwright-report                        
       - store_test_results:
