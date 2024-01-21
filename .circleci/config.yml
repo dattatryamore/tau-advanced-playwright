@@ -36,9 +36,9 @@ jobs:
           name: Build an artifact
           command: echo "some text" > example.txt
       - store_artifacts:
-          path: example.txt
+          path: ./playwright-report
       - store_artifacts:
-          path: ~/repo/test-results
+          path: ./test-results
 
   deploy:
     docker:
