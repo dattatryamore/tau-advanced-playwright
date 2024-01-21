@@ -10,7 +10,9 @@ orbs:
 jobs:
   test:
     docker:
-      - image: cimg/node:16.10
+      - image: mcr.microsoft.com/playwright:v1.40.1-jammy
+    working_directory: ~/repo
+  
     parallelism: 1
     steps:
       - checkout
