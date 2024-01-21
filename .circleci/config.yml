@@ -19,10 +19,6 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run: mkdir -p ~/junit/e2e     
-      - run:
-          name: install playwright browser
-          command: sudo npm install -D @playwright/test && npx playwright install-deps && npx playwright install 
-      - run:
           name: Run playwright tests
           command: |
                     mkdir test-results
