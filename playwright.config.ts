@@ -9,7 +9,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: 0,
   workers: undefined,
-  reporter: 'html',
+  reporter: 'junit',
   // timeout: 5000,
   use: {
     storageState: 'storageState.json',
