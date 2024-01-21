@@ -42,7 +42,7 @@ jobs:
       - store_artifacts:
           path: example.txt
       - store_artifacts:
-          path: ./test-results
+          path: ~/repo/test-results
 
   deploy:
     docker:
