@@ -11,21 +11,14 @@ jobs:
   test:
     docker:
       - image: mcr.microsoft.com/playwright:v1.40.1-jammy
-    working_directory: ~/repo
   
-    parallelism: 1
+    parallelism: 2
     steps:
       - checkout
       - node/install-packages:
           pkg-manager: npm
-      - run: mkdir -p ~/junit/e2e     
-      - run:
-          name: Run playwright tests
-          command: |
-                    mkdir test-results
-                    TEST=$(circleci tests glob "tests/ui/specs/*.ts")
-                    echo "$TEST" | circleci tests run --command="USERNAME=qa.datta@gmail.com PASSWORD=Test@123  xargs npm run test-ui-c -- --reporter=junit --workers=2" --split-by=timings
-      - run: ls ~/repo     
+      - run: ls ~/repo   
+      - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; USERNAME=qa.datta@gmail.com PASSWORD=Test@123  xargs npm run test-ui-c -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
       - store_test_results:
           path: ./playwright-report                        
       - store_test_results:
@@ -41,8 +34,6 @@ jobs:
           command: echo "some text" > example.txt
       - store_artifacts:
           path: example.txt
-      - store_artifacts:
-          path: ~/repo/test-results
 
   deploy:
     docker:
