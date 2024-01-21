@@ -41,6 +41,9 @@ jobs:
           command: echo "some text" > example.txt
       - store_artifacts:
           path: example.txt
+      - store_artifacts:
+          path: ./test-results
+
   deploy:
     docker:
       - image: cimg/base:stable
