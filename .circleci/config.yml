@@ -25,6 +25,7 @@ jobs:
                     mkdir test-results
                     TEST=$(circleci tests glob "tests/ui/specs/*.ts")
                     echo "$TEST" | circleci tests run --command="USERNAME=qa.datta@gmail.com PASSWORD=Test@123  xargs npm run test-ui-c -- --reporter=junit --workers=2" --split-by=timings
+           - run: ls ~/repo     
       - store_test_results:
           path: ./playwright-report                        
       - store_test_results:
